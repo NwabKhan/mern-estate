@@ -16,10 +16,20 @@ mongoose
   });
 
 const app = express();
-app.listen(4000, (req, res) => {
+app.listen(5000, (req, res) => {
   console.log("Runin");
 });
 app.use(express.json()); //It allow json as input to the server
 
 app.use("/api/user", userRouter);
-app.use("/api/signup", authRouter);
+app.use("/api/auth/signup", authRouter);
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
