@@ -22,7 +22,7 @@ app.listen(5000, (req, res) => {
 app.use(express.json()); //It allow json as input to the server
 
 app.use("/api/user", userRouter);
-app.use("/api/auth/signup", authRouter);
+app.use("/api/auth/", authRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
