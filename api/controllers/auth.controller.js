@@ -42,3 +42,48 @@ export const signin = async (req, res, next) => {
     next(error);
   }
 };
+
+//With signin/up with goiogle first we are checking, if the user already exits in db,
+// just give him an access token if now so, then create a new user.
+//Also for creating a new user pass is mendatory, so we set pass by ourself
+export const google = async (req, res, next) => {
+  const { username, email, photo } = req.body;
+  try {
+    const validUser = await User.findOne({ email }); //Checking is the email exits in db
+    if (validUser) {
+      const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET_KEY);
+      const { password: pass, ...rest } = validUser._doc;
+      res
+        .cookie("access_token", token, { httpOnly: true })
+        .status(200)
+        .json(rest);
+    } else {
+      //16 diggit pass (Make pass of 0-9, a-z and give me last 8 digit + same)
+      const generatedPassword =
+        Math.random().toString(36).slice(-8) +
+        Math.random().toString(36).slice(-8);
+      const hashedPassword = bcrypt.hashSync(generatedPassword, 8);
+
+      //Generating unique user name
+      const generatedUsername =
+        username.split(" ").join("").toLowerCase() +
+        Math.random().toString(36).slice(-4);
+      const newUser = new User({
+        username: generatedUsername,
+        email,
+        password: hashedPassword,
+        photo,
+      });
+
+      await newUser.save();
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET_KEY);
+      const { password: pass, ...rest } = newUser._doc;
+      res
+        .cookie("access_token", token, { httpOnly: true })
+        .status(200)
+        .json(rest);
+    }
+  } catch (error) {
+    next(error);
+  }
+};

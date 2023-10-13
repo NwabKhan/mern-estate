@@ -16,6 +16,11 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    photo: {
+      type: String,
+      default:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHqWZxoBKoq3m3mW2f52nFnKI-bFPEjAh84HIojHWSQYOn6XevhtczNdVCobwL8ulDclA&usqp=CAU",
+    },
   },
   {
     timestamps: true,
@@ -24,4 +29,4 @@ const userSchema = mongoose.Schema(
 
 const User = mongoose.model("User", userSchema);
 
-export default User ;
+export default User;
