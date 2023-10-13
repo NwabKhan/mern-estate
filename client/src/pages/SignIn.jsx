@@ -9,7 +9,7 @@ import {
 import OAuth from "../components/OAuth";
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.user); //getting these states from redux
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
