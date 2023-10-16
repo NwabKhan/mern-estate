@@ -4,8 +4,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
-dotenv.config();
+import cookieParser from "cookie-parser";
 
+dotenv.config();
 mongoose
   .connect(process.env.MONGO_KEY)
   .then(() => {
@@ -20,8 +21,9 @@ app.listen(5000, (req, res) => {
   console.log("Runin");
 });
 app.use(express.json()); //It allow json as input to the server
+app.use(cookieParser()); //To get the info from the cookie
 
-app.use("/api/user", userRouter);
+app.use("/api/user/", userRouter);
 app.use("/api/auth/", authRouter);
 
 app.use((err, req, res, next) => {
