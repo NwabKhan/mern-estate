@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -23,8 +24,9 @@ app.listen(5000, (req, res) => {
 app.use(express.json()); //It allow json as input to the server
 app.use(cookieParser()); //To get the info from the cookie
 
-app.use("/api/user/", userRouter);
-app.use("/api/auth/", authRouter);
+app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/listing", listingRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
