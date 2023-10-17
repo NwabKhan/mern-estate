@@ -2,7 +2,8 @@ import Listing from "../models/listing.model.js";
 
 export const createListing = async (req, res, next) => {
   try {
-    const listing = await Listing(req.body);
+    const listing = new Listing(req.body);
+    await listing.save();
     res.status(201).json(listing);
   } catch (error) {
     next(error);
