@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const UpdateListing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const params = useParams();
+  const params = useParams(); //used to get the params(id) in the url
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
