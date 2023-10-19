@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "//comment": "The below build command first install the backend then go to client and install it and then build it which create a dist folder in cient side",
+    "build": "npm install && npm install --prefix client && npm run build"
   },
   "keywords": [],
   "author": "",
