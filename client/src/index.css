@@ -1,7 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
-body{
-    background-color: rgb(241, 245, 241);
+
+@layer components {
+  .btn_primary {
+    @apply py-2 px-4 bg-primary text-light_white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-300;
+  }
+
+  .flex_center {
+    @apply flex justify-center items-center;
+  }
+
+  .label_styles {
+    @apply block mb-4 text-dark_gray uppercase font-semibold;
+  }
+
+  .input_styles {
+    @apply border rounded w-full py-2 px-3 mt-1 focus:outline-none focus:ring focus:ring-blue-200 hover:border-gray-400;
+  }
+}
+
+.custom_box_shadow {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
